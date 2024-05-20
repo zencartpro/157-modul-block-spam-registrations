@@ -27,13 +27,64 @@ Sollte sich ein echter Kunde mal hierher verirren, kann er dort einfach freigesc
 Wie lange Spamkunden dort gespeichert bleiben kann via Shopadministration unter Konfiguration > Antispam für Kundenkonto eingestellt werden.
 
 
-INSTALLATION:
+
+================= WICHTIG =====================
+Vor dem Einbau dieser Änderungen:
+BACKUP von Shop und Datenbank machen! 
+Keine Haftung, Verwendung auf eigene Gefahr!
+BACKUP gemacht? Ok, dann weiterlesen...
+=================================================
+
+
+===== INSTALLATION ===
 
 Voraussetzung:
 Zen Cart 1.5.7h deutsch
 
+1)
+Im Ordner NEUE DATEIEN den Ordner DEINADMIN auf den Namen Ihres admin Verzeichnisses umbenennen.
 
-tbd
+2)
+In die Zen Cart Administration einloggen
 
+3)
+Überprüfen Sie nun erst nochmal ob Sie wirklich in Schritt 1 den Ordner in NEUE DATEIEN entsprechend umbenannt haben.
+Ja?
+Dann nun alle Dateien/Ordner aus dem Ordner NEUE DATEIEN in der vorgegebenen Struktur in die Zen Cart Installation hochladen.
+Dabei werden keine bestehende Dateien überschrieben.
 
+4)
+In der Zen Cart Administration auf irgendeinen Menüpunkt clicken. Sie sollten oben grüne Erfolgsmeldungen sehen und unter Konfiguration ist nun der neue Menüpunkt "Anti Spam für Kundenkonto" vorhanden. 
 
+5)
+Stellen Sie hier Spam Registrierungen blocken - Aktivieren auf true
+Die restlichen Einstellungen erstmal auf den voreingestellten Werten lassen. Sollten Sie später feststellen, dass die Spamerkennung zu lasch oder zu scharf eingestellt ist, können Sie die Werte entsprechend anpassen.
+
+6)
+Im Ordner GEAENDERTE DATEIEN finden Sie eine Vorlage für die einige Datei, die von diesem Modul geändert werden muss:
+includes/modules/DEINTEMPLATE/create_account.php
+Hier wird in ca. Zeile 274 ein erforderlicher Notifier eingefügt:
+
+// BOF Block Spam Registrations
+$zco_notifier->notify('NOTIFY_CREATE_ACCOUNT_ANTISPAM_CHECK', $error, $firstname, $lastname, $city, $suburb);
+// EOF Block Spam Registrations
+
+Es wird dringend empfohlen, die bestehenden Orginaldatei nicht einfach zu überschreiben!
+Machen Sie das nur, wenn Sie Zen Cart 1.5.7h gerade neu installiert haben und noch keine Änderungen an Originaldateien vorgenommen haben.
+Stattdessen vergleichen Sie Ihre entsprechenden Originaldatei mit einem geeigneten Programm wie z.B. WinMerge oder Beyond Compare und nehmen die Änderung manuell vor.
+
+Sollten Sie in Ihrem Shop auch das Modul Bestellen ohne Kundenkonto (COWOA) verwenden, dann müssen Sie den entsprechenden Notifier auch in folgender Datei einfügen:
+includes/modules/DEINTEMPLATE/no_account.php
+
+Hier wird der Notifier ca. Zeil 218 eingefügt.
+Eine entsprechende Vorlage finden Sie ebnfalls im Ordner GEAENDERTE DATEIEN
+
+7)
+Laden Sie nun die geänderte includes/modules/DEINTEMPLATE/create_account.php hoch und überschreiben Ihre bestehende damit.
+Falls Sie auch Bestellen ohne Kundenkonto verwenden laden Sie auch die geänderte includes/modules/DEINTEMPLATE/no_account.php hoch und überschreiben Ihre bestehende damit.
+
+8)
+Registrieren Sie nun testweise ein neues Kundenkonto in Ihrem Shop mit den oben im Beispiel angegebenen Daten.
+Sie bekommen die Meldung, dass das Kundenkonto nicht angelegt wurde.
+Unter Kunden > Spam Registrierungen sehen Sie nun in der Shopadministration den geblockten Kunden.
+Hier haben Sie dann später auch die Möglichkeit einen fälschlicherweise als Spammer eingestuften Kunden freizuschalten.
