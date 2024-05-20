@@ -14,11 +14,11 @@ Typisches Beispiel einer solchen Spam Registrierung:
 
 ## Funktionsweise ##
 * Dieses Modul nimmt anhand der bekannten Spam Merkmale eine Bewertung vor und legt bei solchen Registrierungen kein Kundenkonto an.
-* Die Anzahl der für eine Spam Bewertung erforderlichen Großbuchstaben und die zu prüfenden Felder können in der Shopadministration angepasst werden.
+* Die Anzahl der für eine Spam Bewertung erforderlichen Großbuchstaben und die zu prüfenden Felder können in der Shopadministration unter Konfiguration > Antispam für Kundenkonto angepasst werden.
 * Mit den voreingestellten Standarwerten für Vorname, Nachname, Ort und Adresszeile 2 sollte man aber solchen Spam wirksam blocken können ohne dass zuviele echte Kunden betroffen sind.
-* Als Spam erkannte Kundenkonten sind in der Shopadminsitration unter Kunden > Spam Registrierungen ersichtlich.
+* Als Spam erkannte Kundenkonten sind in der Shopadministration unter Kunden > Spam Registrierungen ersichtlich.
 * Sollte sich ein echter Kunde mal hierher verirren, kann er dort einfach freigeschaltet werden.
-* Wie lange Spamkunden dort gespeichert bleiben kann via Shopadministration eingestellt werden.
+* Wie lange Spamkunden dort gespeichert bleiben kann via Shopadministration unter Konfiguration > Antispam für Kundenkonto eingestellt werden.
 
 ## Credits ##
 based on ZX Antispam and Email Verification by ZenExpert - https://zenexpert.com
