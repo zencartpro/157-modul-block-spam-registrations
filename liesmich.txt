@@ -61,7 +61,7 @@ Stellen Sie hier Spam Registrierungen blocken - Aktivieren auf true
 Die restlichen Einstellungen erstmal auf den voreingestellten Werten lassen. Sollten Sie später feststellen, dass die Spamerkennung zu lasch oder zu scharf eingestellt ist, können Sie die Werte entsprechend anpassen.
 
 6)
-Im Ordner GEAENDERTE DATEIEN finden Sie eine Vorlage für die einige Datei, die von diesem Modul geändert werden muss:
+Im Ordner GEAENDERTE DATEIEN finden Sie eine Vorlage für die einzige Datei, die von diesem Modul geändert werden muss:
 includes/modules/DEINTEMPLATE/create_account.php
 Hier wird in ca. Zeile 274 ein erforderlicher Notifier eingefügt:
 
@@ -73,18 +73,39 @@ Es wird dringend empfohlen, die bestehenden Orginaldatei nicht einfach zu übers
 Machen Sie das nur, wenn Sie Zen Cart 1.5.7h gerade neu installiert haben und noch keine Änderungen an Originaldateien vorgenommen haben.
 Stattdessen vergleichen Sie Ihre entsprechenden Originaldatei mit einem geeigneten Programm wie z.B. WinMerge oder Beyond Compare und nehmen die Änderung manuell vor.
 
-Sollten Sie in Ihrem Shop auch das Modul Bestellen ohne Kundenkonto (COWOA) verwenden, dann müssen Sie den entsprechenden Notifier auch in folgender Datei einfügen:
-includes/modules/DEINTEMPLATE/no_account.php
-
-Hier wird der Notifier ca. Zeil 218 eingefügt.
-Eine entsprechende Vorlage finden Sie ebnfalls im Ordner GEAENDERTE DATEIEN
-
 7)
 Laden Sie nun die geänderte includes/modules/DEINTEMPLATE/create_account.php hoch und überschreiben Ihre bestehende damit.
-Falls Sie auch Bestellen ohne Kundenkonto verwenden laden Sie auch die geänderte includes/modules/DEINTEMPLATE/no_account.php hoch und überschreiben Ihre bestehende damit.
 
 8)
 Registrieren Sie nun testweise ein neues Kundenkonto in Ihrem Shop mit den oben im Beispiel angegebenen Daten.
 Sie bekommen die Meldung, dass das Kundenkonto nicht angelegt wurde.
 Unter Kunden > Spam Registrierungen sehen Sie nun in der Shopadministration den geblockten Kunden.
 Hier haben Sie dann später auch die Möglichkeit einen fälschlicherweise als Spammer eingestuften Kunden freizuschalten.
+
+OPTIONAL
+
+Sollten Sie in Ihrem Shop auch das Modul Bestellen ohne Kundenkonto (COWOA) verwenden, dann verwenden Sie als Vorlage für die Änderung der includes/modules/DEINTEMPLATE/create_account.php die entsprechende Datei im Ordner OPTIONAL - COWOA
+Für COWOA muss der entsprechende Notifier auch in folgender Datei eingefügt werden:
+includes/modules/DEINTEMPLATE/no_account.php
+Hier wird der Notifier ca. Zeile 218 eingefügt.
+Eine entsprechende Vorlage finden Sie ebenfalls im Ordner OPTIONAL - COWOA
+Falls Sie auch Bestellen ohne Kundenkonto verwenden laden Sie nun auch die geänderte includes/modules/DEINTEMPLATE/no_account.php hoch und überschreiben Ihre bestehende damit.
+Nach diesen Änderungen legen Sie etwas in den Warenkorb, gehen zur Kasse und verwenden Bestellen ohne Kundenkonto.
+Auch hier wird bei Eingabe der entsprechenden Daten aus dem Beispiel das Anlegen des COWOA Accounts verhindert und der Spamkunde ist unter Kunden > Spam Registrierungen ersichtlich.
+
+
+
+===== DEINSTALLATION ===
+
+Um das Modul vollständig zu entfernen:
+
+1)
+Alle von diesem Modul neu angelegten Dateien vom Server löschen
+
+2)
+Die geänderte includes/modules/DEINTEMPLATE/create_account.php (und falls COWOA verwendet wird includes/modules/DEINTEMPLATE/no_account.php) wieder mit den Originalversionen aus Ihrem Backup ersetzen
+
+3)
+Die uninstall.sql im Ordner UNINSTALL mit einem Texteditor öffnen und den Inhalt ins Eingabefeld unter Tools > SQL Patches installieren kopieren und absenden.
+
+
