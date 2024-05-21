@@ -5,10 +5,10 @@
  * @copyright Copyright 2003-2024 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: auto.block-spam-registrations.php 2024-05-20 19:05:39Z webchills $
+ * @version $Id: auto.block_spam_registrations.php 2024-05-21 10:05:39Z webchills $
  */
 
-class zcObserverBlockSpamRegistrationsObserver extends base {
+class zcObserverBlockSpamRegistrations extends base {
 
     public function __construct()
     {
@@ -89,15 +89,7 @@ class zcObserverBlockSpamRegistrationsObserver extends base {
             $sql_data_array[] = array('fieldName'=>'entry_country_id', 'value'=>$country, 'type'=>'integer');
 
             if (ACCOUNT_COMPANY == 'true') $sql_data_array[] = array('fieldName'=>'entry_company', 'value'=>$company, 'type'=>'stringIgnoreNull');
-            if (ACCOUNT_SUBURB == 'true') $sql_data_array[] = array('fieldName'=>'entry_suburb', 'value'=>$suburb, 'type'=>'stringIgnoreNull');
-
-           
-
-            $token = RandomToken();
-            $sql_data_array[] = array('fieldName'=>'token', 'value'=>$token, 'type'=>'stringIgnoreNull');
-
-            $token_manual = random_int(100,999).'-'.random_int(100,999);
-            $sql_data_array[] = array('fieldName'=>'token_manual', 'value'=>str_replace('-', '', $token_manual), 'type'=>'stringIgnoreNull');
+            if (ACCOUNT_SUBURB == 'true') $sql_data_array[] = array('fieldName'=>'entry_suburb', 'value'=>$suburb, 'type'=>'stringIgnoreNull');    
 
             $sql_data_array[] = array('fieldName'=>'reason', 'value'=>$spam['reason'], 'type'=>'stringIgnoreNull');
             

@@ -5,7 +5,7 @@
  * @copyright Copyright 2003-2024 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: 1_2_0.php 2024-05-16 14:55:39Z webchills $
+ * @version $Id: 1_2_0.php 2024-05-21 10:16:39Z webchills $
  */
  
 $db->Execute(" SELECT @gid:=configuration_group_id
@@ -56,9 +56,7 @@ $db->Execute("CREATE TABLE IF NOT EXISTS " . TABLE_CUSTOMERS_SPAM . " (
   `entry_company` varchar(64) DEFAULT NULL,
   `entry_suburb` varchar(32) DEFAULT NULL,
   `entry_zone_id` int(11) NOT NULL DEFAULT 0,
-  `entry_state` varchar(32) DEFAULT NULL,
-  `token` varchar(64) NOT NULL,
-  `token_manual` int(11) NOT NULL,
+  `entry_state` varchar(32) DEFAULT NULL,  
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `reason` text NOT NULL,
   `registration_ip` varchar(45) NOT NULL DEFAULT '0.0.0.0',
