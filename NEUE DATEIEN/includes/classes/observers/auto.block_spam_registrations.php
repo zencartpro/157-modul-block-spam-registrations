@@ -5,7 +5,7 @@
  * @copyright Copyright 2003-2024 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: auto.block_spam_registrations.php 2024-05-21 10:05:39Z webchills $
+ * @version $Id: auto.block_spam_registrations.php 2024-05-21 11:34:39Z webchills $
  */
 
 class zcObserverBlockSpamRegistrations extends base {
@@ -43,7 +43,9 @@ class zcObserverBlockSpamRegistrations extends base {
          $newsletter = zen_db_prepare_input($_POST['newsletter']);
         }
         }
+        if (isset($_POST['password'])) {
         $password = zen_db_prepare_input($_POST['password']);
+        }
         $email_format = $_POST['email_format'];
         $customers_authorization = (int)CUSTOMERS_APPROVAL_AUTHORIZATION;
         $customers_referral = 'none';
@@ -62,7 +64,7 @@ class zcObserverBlockSpamRegistrations extends base {
    $postcode = zen_db_prepare_input($_POST['postcode']);
    $city = zen_db_prepare_input($_POST['city']);
    $country = zen_db_prepare_input($_POST['zone_country_id']);
-
+if (isset($_POST['password'])) {
             $sql_data_array = array(array('fieldName'=>'customers_firstname', 'value'=>$firstname, 'type'=>'stringIgnoreNull'),
                 array('fieldName'=>'customers_lastname', 'value'=>$lastname, 'type'=>'stringIgnoreNull'),
                 array('fieldName'=>'customers_email_address', 'value'=>$email_address, 'type'=>'stringIgnoreNull'),               
@@ -71,10 +73,23 @@ class zcObserverBlockSpamRegistrations extends base {
                 array('fieldName'=>'customers_fax', 'value'=>$fax, 'type'=>'stringIgnoreNull'),
                 array('fieldName'=>'customers_newsletter', 'value'=>$newsletter, 'type'=>'integer'),
                 array('fieldName'=>'customers_email_format', 'value'=>$email_format, 'type'=>'stringIgnoreNull'),
-                array('fieldName'=>'customers_default_address_id', 'value'=>0, 'type'=>'integer'),
-                array('fieldName'=>'customers_password', 'value'=>zen_encrypt_password($password), 'type'=>'stringIgnoreNull'),
+                array('fieldName'=>'customers_default_address_id', 'value'=>0, 'type'=>'integer'),               
+                array('fieldName'=>'customers_password', 'value'=>zen_encrypt_password($password), 'type'=>'stringIgnoreNull'),               
                 array('fieldName'=>'customers_authorization', 'value'=>$customers_authorization, 'type'=>'integer'),                                       
             );
+          } else {
+          	 $sql_data_array = array(array('fieldName'=>'customers_firstname', 'value'=>$firstname, 'type'=>'stringIgnoreNull'),
+                array('fieldName'=>'customers_lastname', 'value'=>$lastname, 'type'=>'stringIgnoreNull'),
+                array('fieldName'=>'customers_email_address', 'value'=>$email_address, 'type'=>'stringIgnoreNull'),               
+                array('fieldName'=>'customers_nick', 'value'=>$nick, 'type'=>'stringIgnoreNull'),
+                array('fieldName'=>'customers_telephone', 'value'=>$telephone, 'type'=>'stringIgnoreNull'),
+                array('fieldName'=>'customers_fax', 'value'=>$fax, 'type'=>'stringIgnoreNull'),
+                array('fieldName'=>'customers_newsletter', 'value'=>$newsletter, 'type'=>'integer'),
+                array('fieldName'=>'customers_email_format', 'value'=>$email_format, 'type'=>'stringIgnoreNull'),
+                array('fieldName'=>'customers_default_address_id', 'value'=>0, 'type'=>'integer'),  
+                array('fieldName'=>'customers_authorization', 'value'=>$customers_authorization, 'type'=>'integer'),                                       
+            );
+          }
 
             $sql_data_array[] = array('fieldName'=>'customers_referral', 'value'=> $customers_referral, 'type'=>'string');
             if (ACCOUNT_GENDER == 'true') {
