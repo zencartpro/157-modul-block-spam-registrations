@@ -5,7 +5,7 @@
  * @copyright Copyright 2003-2024 Zen Cart Development Team
  * Zen Cart German Version - www.zen-cart-pro.at
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: auto.block_spam_registrations.php 2024-05-21 11:34:39Z webchills $
+ * @version $Id: auto.block_spam_registrations.php 2024-06-21 14:34:39Z webchills $
  */
 
 class zcObserverBlockSpamRegistrations extends base {
@@ -45,6 +45,8 @@ class zcObserverBlockSpamRegistrations extends base {
         }
         if (isset($_POST['password'])) {
         $password = zen_db_prepare_input($_POST['password']);
+      } else {
+      	$password = '';
         }
         $email_format = $_POST['email_format'];
         $customers_authorization = (int)CUSTOMERS_APPROVAL_AUTHORIZATION;
@@ -54,7 +56,11 @@ class zcObserverBlockSpamRegistrations extends base {
             $gender = zen_db_prepare_input($_POST['gender']);
         }
     }
-    if (ACCOUNT_DOB == 'true') $dob = zen_db_prepare_input($_POST['dob']);
+    if (isset($_POST['dob'])) {
+     $dob = zen_db_prepare_input($_POST['dob']);
+     } else {
+     $dob = '0001-01-01 00:00:00';
+     }
      $street_address = zen_db_prepare_input($_POST['street_address']);
   if (ACCOUNT_SUBURB == 'true') $suburb = zen_db_prepare_input($_POST['suburb']);
   $postcode = zen_db_prepare_input($_POST['postcode']);
